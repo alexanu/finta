@@ -13,7 +13,7 @@ may not be accurate.*
 
 ## Supported indicators:
 
-Finta supports 75 trading indicators:
+Finta supports 76 trading indicators:
 
 ```
 * Simple Moving Average 'SMA'
@@ -93,6 +93,7 @@ Finta supports 75 trading indicators:
 * Finite Volume Element 'FVE'
 * Volume Flow Indicator 'VFI'
 * Moving Standard deviation 'MSD'
+* Schaff Trend Cycle 'STC'
 ```
 
 ## Dependencies:
@@ -118,21 +119,17 @@ or latest development version:
 Prepare data to use with finta:
 
 finta expects properly formated `ohlc` DataFrame, with column names in `lowercase`:
-["open", "high", "low", close"] and ["volume"] for indicators that expect `ohlcv` input.
+["open", "high", "low", "close"] and ["volume"] for indicators that expect `ohlcv` input.
 
-To prepare the DataFrame into `ohlc` format you can do something as following:
+### to resample by time period (you can choose different time period)
+`ohlc = resample(df, "24h")`
 
-### standardize column names of your source
-`df.columns = ["date", 'close', 'volume']`
+### You can also load a ohlc DataFrame from .cvs file
 
-### set index on the date column, which is requirement to sort it by time periods
-`df.set_index('date', inplace=True)`
+`data_file = ("data/bittrex:btc-usdt.csv")`
 
-### select only price column, resample by time period and return daily ohlc (you can choose different time period)
-`ohlc = df["close"].resample("24h").ohlc()`
+`ohlc = pd.read_csv(data_file, index_col="date", parse_dates=True)`
 
-
-`ohlc()` method applied on the Series above will automatically format the dataframe in format expected by the library so resulting `ohlc` Series is ready to use.
 ____________________________________________________________________________
 
 ## Examples:
@@ -151,6 +148,9 @@ ____________________________________________________________________________
 
 ### will return Series with calculated BBANDS values but will use KAMA instead of MA for calculation, other types of Moving Averages are allowed as well.
 `TA.BBANDS(ohlc, TA.KAMA(ohlc, 20))`
+
+
+For more examples see examples directory.
 
 ------------------------------------------------------------------------
 
@@ -174,6 +174,6 @@ royalty free.
 
 Buy me a beer 🍺:
 
-Bitcoin: 39PdX8jhXvUpzpkDibwMAVHVs6ZtoHCjnm
+Bitcoin: 3NibjuvQPzcfuLaefhUEEFBcmHpXgKgs4m
 
-Peercoin: PRn448Km1ZJ2BhdPQfiSS3q4Af2vkjwwvH
+Peercoin: P9dAfWoxT7kksKAStubDQR6RhdXk5z12rV

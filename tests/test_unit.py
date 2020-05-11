@@ -84,7 +84,7 @@ def test_trix():
     ma = TA.TRIX(ohlc)
 
     assert isinstance(ma, series.Series)
-    assert ma.values[-1] == -142.64042774606133
+    assert ma.values[-1] == -0.5498363959871698
 
 
 def test_vama():
@@ -120,7 +120,7 @@ def test_zlema():
     ma = TA.ZLEMA(ohlc)
 
     assert isinstance(ma, series.Series)
-    assert ma.values[-1] == 5193.0313725800006
+    assert ma.values[-1] == 6462.46183364893
 
 
 def test_wma():
@@ -235,6 +235,13 @@ def test_roc():
     assert isinstance(roc, series.Series)
     assert roc.values[-1] == -16.049187698674462
 
+def test_vbm():
+    """test TA.VBM"""
+
+    vbm = TA.VBM(ohlc)
+
+    assert isinstance(vbm, series.Series)
+    assert vbm.values[-1] == -27.570386941281036
 
 def test_rsi():
     """test TA.RSI"""
@@ -322,8 +329,8 @@ def test_kc():
     assert isinstance(kc["KC_UPPER"], series.Series)
     assert isinstance(kc["KC_LOWER"], series.Series)
 
-    assert kc["KC_UPPER"].values[-1] == 6059.9253031099979
-    assert kc["KC_LOWER"].values[-1] == 4591.8874420500033
+    assert kc["KC_UPPER"].values[-1] == 7014.749436242795
+    assert kc["KC_LOWER"].values[-1] == 5546.7115751828005
 
 
 def test_do():
@@ -348,8 +355,8 @@ def test_dmi():
     assert isinstance(dmi["DI+"], series.Series)
     assert isinstance(dmi["DI-"], series.Series)
 
-    assert dmi["DI+"].values[-1] == 4.2514733223789332
-    assert dmi["DI-"].values[-1] == 20.093318043215021
+    assert dmi["DI+"].values[-1] == 5.750468483527035
+    assert dmi["DI-"].values[-1] == 27.8987716317747
 
 
 def test_adx():
@@ -358,7 +365,7 @@ def test_adx():
     adx = TA.ADX(ohlc)
 
     assert isinstance(adx, series.Series)
-    assert adx.values[-1] == 54.781005617031234
+    assert adx.values[-1] == 54.21179329188816
 
 
 def test_stoch():
@@ -432,8 +439,8 @@ def test_vortex():
     assert isinstance(v["VIp"], series.Series)
     assert isinstance(v["VIm"], series.Series)
 
-    assert v["VIp"].values[-1] == 31.175958144620818
-    assert v["VIm"].values[-1] == -51.640155675485332
+    assert v["VIp"].values[-1] == 0.7685610477050326
+    assert v["VIm"].values[-1] == -1.273051880731049
 
 
 def test_kst():
@@ -665,7 +672,7 @@ def test_fish():
 def test_ichimoku():
     """test TA.ICHIMOKU"""
 
-    ichi = TA.ICHIMOKU(ohlc)
+    ichi = TA.ICHIMOKU(ohlc, 10, 25)
 
     assert isinstance(ichi["TENKAN"], series.Series)
     assert isinstance(ichi["KIJUN"], series.Series)
